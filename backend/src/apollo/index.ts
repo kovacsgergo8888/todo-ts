@@ -12,14 +12,30 @@ const typeDefs = gql`
         dueDate: Date
     }
 
+    input TodoInput {
+        todo: String!
+        location: String
+        dueDate: Date
+    }
+
     type Query {
         todos: [Todo]
+    }
+
+    type Mutation {
+        addTodo(todoInput: TodoInput): Todo
     }
 `
 const resolvers = {
     Date: dateScalar,
     Query: {
         todos: () => Todo.find()
+    },
+    Mutation: {
+        async addTodo (parent: any, args: any) {
+            const todo = await Todo.create(args.todoInput)
+            return todo
+        }
     }
 }
 

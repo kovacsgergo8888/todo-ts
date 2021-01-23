@@ -21,6 +21,7 @@ const typeDefs = gql`
 
     type Query {
         todos: [Todo]
+        todo(id: ID!): Todo
     }
 
     type Mutation {
@@ -31,7 +32,8 @@ const typeDefs = gql`
 const resolvers = {
     Date: dateScalar,
     Query: {
-        todos: () => Todo.find()
+        todos: () => Todo.find(),
+        todo: (parent: any, args: any) => Todo.findById(args.id)
     },
     Mutation: {
         async addTodo (parent: any, args: any) {

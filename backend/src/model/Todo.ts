@@ -1,5 +1,5 @@
 import mongoose from '../mongooseConnection'
-import {Schema, Model} from 'mongoose'
+import {Schema} from 'mongoose'
 
 const TodoSchema: Schema = new Schema({
     todo: {type: String, required: true},

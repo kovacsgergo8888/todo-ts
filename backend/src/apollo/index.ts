@@ -7,6 +7,7 @@ const typeDefs = gql`
     scalar Date
 
     type Todo {
+        id: ID!
         todo: String
         location: String
         dueDate: Date
@@ -24,6 +25,7 @@ const typeDefs = gql`
 
     type Mutation {
         addTodo(todoInput: TodoInput): Todo
+        deleteTodo(id: ID!): ID
     }
 `
 const resolvers = {
@@ -35,6 +37,10 @@ const resolvers = {
         async addTodo (parent: any, args: any) {
             const todo = await Todo.create(args.todoInput)
             return todo
+        },
+        async deleteTodo(parent: any, args: any) {
+            await Todo.deleteOne({_id: args.id})
+            return args.id
         }
     }
 }

@@ -1,4 +1,4 @@
-import {GraphQLScalarType, Kind} from 'graphql'
+import {GraphQLScalarType, Kind, StringValueNode} from 'graphql'
 
 export const dateScalar = new GraphQLScalarType({
     name: 'Date',
@@ -10,9 +10,14 @@ export const dateScalar = new GraphQLScalarType({
         return new Date(value); // Convert incoming integer to Date
     },
     parseLiteral(ast) {
-        if (ast.kind === Kind.INT) {
-            return parseInt(ast.value, 10); // Convert hard-coded AST string to type expected by parseValue
+        if (ast.kind === Kind.STRING) {
+            try {
+                return new Date(ast.value).getTime()
+            } catch (e) {
+                return null
+            }
         }
+
         return null; // Invalid hard-coded value (not an integer)
     },
 })

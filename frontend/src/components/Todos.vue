@@ -4,7 +4,7 @@
         {{todos}}
     </div>
     <div>
-        <button >new todo</button>
+        <button @click="newTodo">new todo</button>
     </div>
 </template>
 
@@ -12,8 +12,10 @@
 import {defineComponent, ref} from 'vue'
 import {client} from '../graphql-request/client'
 import {gql} from 'graphql-request'
+import {useRouter} from 'vue-router'
 export default defineComponent({
     setup () {
+        const router = useRouter()
         const todos = ref([])
         const getTodos = async () => {
             const data = await client.request(
@@ -21,11 +23,15 @@ export default defineComponent({
             )
             todos.value = data.todos
         }
+        const newTodo = () => {
+            router.push({name: 'newTodo'})
+        }
 
         getTodos()
 
         return {
-            todos
+            todos,
+            newTodo
         }
     }
 })

@@ -12,7 +12,7 @@
         <input type="text"/>
     </div>
     <div>
-        <button @click="backToTodos">back to todos</button>
+        <btn @click="backToTodos">back to todos</btn>
     </div>
 </template>
 

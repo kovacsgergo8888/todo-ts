@@ -1,16 +1,14 @@
 <template>
-    <h1>Todos</h1>
-    <div>
-        {{todos}}
+    <h1 class="pb-6 text-center text-3xl tracking-wider antialiased">Todos</h1>
+    <div class="mb-6 text-right">
+        <btn @click="newTodo">+</btn>
     </div>
     <div>
         <TodoListItem
             v-for="todo in todos" :key="todo.id"
             :todo="todo"
+            @delete-todo="deleteTodo"
         />
-    </div>
-    <div>
-        <button @click="newTodo">new todo</button>
     </div>
 </template>
 
@@ -36,12 +34,23 @@ export default defineComponent({
         const newTodo = () => {
             router.push({name: 'newTodo'})
         }
+        const deleteTodo = async (todo) => {
+            todos.value = todos.value.filter(t => t.id !== todo.id)
+            client.request(gql`
+                mutation deleteTodo($todoId: ID!) {
+                    deleteTodo(id: $todoId)
+                }
+            `, {
+                todoId: todo.id
+            })
+        }
 
         getTodos()
 
         return {
             todos,
-            newTodo
+            newTodo,
+            deleteTodo
         }
     }
 })

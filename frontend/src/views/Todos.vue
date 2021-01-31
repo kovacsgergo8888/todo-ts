@@ -1,9 +1,15 @@
 <template>
-    <h1 class="pb-6 text-center text-3xl tracking-wider antialiased">Todos</h1>
+    <h1 class="pb-6 text-center text-6xl tracking-wider antialiased">Todos</h1>
     <div class="mb-6 text-right">
         <btn @click="newTodo">+</btn>
     </div>
-    <div>
+    <div 
+        class="text-center text-3xl"
+        v-if="!todos.length"
+    >
+        No todos!
+    </div>
+    <div v-else>
         <TodoListItem
             v-for="todo in todos" :key="todo.id"
             :todo="todo"

@@ -1,18 +1,27 @@
 <template>
-    <button class="btn-indigo">
-        <slot></slot>
-    </button>
+  <button class="btn" :class="classes">
+    <slot></slot>
+  </button>
 </template>
 
-<style>
-  .btn-indigo {
-    @apply py-2 px-4 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75;
-  }
-</style>
-
 <script>
-import {defineComponent} from 'vue'
+import {defineComponent, reactive} from 'vue'
 export default defineComponent({
-    name: 'Btn'
+  name: 'Btn',
+  props: {
+    secondary: {
+      type: Boolean,
+      default: false
+    }
+  },
+  setup ({secondary}) {
+    const classes = reactive({})
+    if (secondary) {
+      classes['btn-secondary'] = true
+    }
+    return {
+      classes
+    }
+  }
 })
 </script>

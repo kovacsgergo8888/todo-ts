@@ -4,7 +4,9 @@
 
 @layer components {
     .input-text-field {
-        @apply border-2 mb-6 rounded-md hover:border-gray-400
+        @apply 
+            border-2 mb-6 rounded-md py-2 px-1
+            hover:border-gray-400
     }
     .btn {
         @apply py-2 px-4 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75;

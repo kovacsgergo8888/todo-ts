@@ -19,13 +19,10 @@
 
 <script lang="ts">
 import {defineComponent, ref} from 'vue'
-import {useRoute, useRouter} from 'vue-router'
-import {client} from '../graphql-request/client'
-import {gql} from 'graphql-request'
-
+import {useRouter} from 'vue-router'
+import {useStore} from 'vuex'
 export default defineComponent({
     setup () {
-        const route = useRoute()
         const router = useRouter()
         const todo = ref('')
         const location = ref('')
@@ -34,23 +31,14 @@ export default defineComponent({
             router.push({name: 'todos'})
         }
 
+        const store = useStore()
+
         const addTodo = async () => {
-            const response = await client.request(gql`
-                mutation addTodo($todoInput: TodoInput) {
-                    addTodo(todoInput: $todoInput) {
-                        todo
-                        location
-                        dueDate
-                    }
-                }`,
-                {
-                    todoInput: {
-                        todo: todo.value,
-                        location: location.value || null,
-                        dueDate: dueDate.value || null
-                    }
-                }
-            )
+            await store.dispatch('addTodo', {
+                todo: todo.value,
+                location: location.value,
+                dueDate: dueDate.value
+            })
             backToTodos()
         }
         return {

@@ -9,54 +9,35 @@
     >
         No todos!
     </div>
-    <div v-else>
+    <template v-else>
+        <div>{{todos.length}} todo(s)</div>
         <TodoListItem
             v-for="todo in todos" :key="todo.id"
             :todo="todo"
             @delete-todo="deleteTodo"
         />
-    </div>
+    </template>
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from 'vue'
-import {client} from '../graphql-request/client'
-import {gql} from 'graphql-request'
+import {defineComponent, computed} from 'vue'
 import {useRouter} from 'vue-router'
 import TodoListItem from './TodoList/TodoListItem.vue'
+import {useStore} from 'vuex'
+
 export default defineComponent({
     components: {
         TodoListItem
     },
     setup () {
         const router = useRouter()
-        const todos = ref([])
-        const getTodos = async () => {
-            const data = await client.request(
-               gql`{todos {id todo location dueDate}}`
-            )
-            todos.value = data.todos
-        }
-        const newTodo = () => {
-            router.push({name: 'newTodo'})
-        }
-        const deleteTodo = async (todo) => {
-            todos.value = todos.value.filter(t => t.id !== todo.id)
-            client.request(gql`
-                mutation deleteTodo($todoId: ID!) {
-                    deleteTodo(id: $todoId)
-                }
-            `, {
-                todoId: todo.id
-            })
-        }
-
-        getTodos()
-
+        const store = useStore()
+        
+        store.dispatch('loadTodos')
         return {
-            todos,
-            newTodo,
-            deleteTodo
+            todos: computed(() => store.state.todos),
+            newTodo: () => router.push({name: 'newTodo'}),
+            deleteTodo: (todo: any) => store.dispatch('deleteTodo', {todo})
         }
     }
 })

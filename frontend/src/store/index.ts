@@ -1,10 +1,10 @@
 import {createStore} from 'vuex'
 import {client} from '../graphql-request/client'
 import {gql} from 'graphql-request'
-
+import Todo from '../types/Todo'
 const store = createStore({
     state: {
-        todos: []
+        todos: [] as Todo[]
     },
     mutations: {
         setTodos (state, todos) {
@@ -14,7 +14,7 @@ const store = createStore({
             state.todos.push(todo)
         },
         removeTodo (state, id) {
-            state.todos = state.todos.filter((t: any) => t.id !== id)
+            state.todos = state.todos.filter((t: Todo) => t.id !== id)
         }
     },
     actions: {

@@ -4,7 +4,10 @@
   </button>
 </template>
 
-<script>
+<script lang="ts">
+interface ButtonClass {
+  'btn-secondary'?: boolean
+}
 import {defineComponent, reactive} from 'vue'
 export default defineComponent({
   name: 'Btn',
@@ -15,7 +18,7 @@ export default defineComponent({
     }
   },
   setup ({secondary}) {
-    const classes = reactive({})
+    const classes = reactive<ButtonClass>({})
     if (secondary) {
       classes['btn-secondary'] = true
     }

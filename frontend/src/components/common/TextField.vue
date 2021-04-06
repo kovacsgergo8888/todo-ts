@@ -18,8 +18,8 @@ export default defineComponent({
             type: String
         }
     },
-    setup ({modelValue}, {emit}) {
-        const emitValue = (event) => {
+    setup ({}, {emit}) {
+        const emitValue = (event: any) => {
             emit('update:modelValue', event.target.value)
         }
         return {

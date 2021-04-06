@@ -1,6 +1,7 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
-import TodoForm from '../components/TodoForm.vue'
-import Todos from '../views/Todos.vue'
+
+const Todos = () => import('../views/Todos.vue')
+const TodoForm = () => import('../components/TodoForm.vue')
 
 export const router = createRouter({
     history: createWebHashHistory(),

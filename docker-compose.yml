@@ -9,6 +9,11 @@ services:
     ports:
       - 4000:4000
 
+  frontend:
+    build: ./frontend
+    ports:
+      - 8080:80
+
   mongo:
     image: mongo
     restart: always

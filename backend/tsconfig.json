@@ -6,7 +6,8 @@
         "preserveConstEnums": true,
         "sourceMap": false,
         "target": "ES2020",
-        "outDir": "dist"
+        "outDir": "dist",
+        "allowSyntheticDefaultImports": true
     },
     "include": [
         "src/**/*"

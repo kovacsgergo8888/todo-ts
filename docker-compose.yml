@@ -2,6 +2,13 @@ version: '3.1'
 
 services:
 
+  backend:
+    build: ./backend
+    depends_on:
+      - mongo
+    ports:
+      - 4000:4000
+
   mongo:
     image: mongo
     restart: always
@@ -11,5 +18,7 @@ services:
   mongo-express:
     image: mongo-express
     restart: always
+    depends_on:
+      - mongo
     ports:
       - 8081:8081

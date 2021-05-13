@@ -1,5 +1,5 @@
 # build stage
-FROM node:14.16-alpine as build-stage
+FROM node:16-alpine as build-stage
 WORKDIR /app
 COPY package*.json /app
 RUN npm i

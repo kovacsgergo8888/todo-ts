@@ -12,13 +12,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mongoose": "^5.12.3",
-    "typescript": "^4.1.3"
+    "mongoose": "^5.13.14",
+    "typescript": "^4.6.4"
   },
   "devDependencies": {
-    "apollo-server": "^2.19.2",
-    "graphql": "^15.4.0",
-    "nodemon": "^2.0.7",
+    "apollo-server": "^2.25.3",
+    "graphql": "^15.8.0",
+    "nodemon": "^2.0.16",
     "ts-node": "^9.1.1"
   }
 }

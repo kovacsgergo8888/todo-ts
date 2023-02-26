@@ -4,27 +4,21 @@
   </button>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
+import { reactive, defineProps } from 'vue'
 interface ButtonClass {
   'btn-secondary'?: boolean
 }
-import {defineComponent, reactive} from 'vue'
-export default defineComponent({
-  name: 'Btn',
-  props: {
-    secondary: {
-      type: Boolean,
-      default: false
-    }
-  },
-  setup ({secondary}) {
-    const classes = reactive<ButtonClass>({})
-    if (secondary) {
-      classes['btn-secondary'] = true
-    }
-    return {
-      classes
-    }
+
+const props = defineProps({
+  secondary: {
+    type: Boolean,
+    default: false
   }
 })
+
+const classes = reactive<ButtonClass>({})
+if (props.secondary) {
+  classes['btn-secondary'] = true
+}
 </script>

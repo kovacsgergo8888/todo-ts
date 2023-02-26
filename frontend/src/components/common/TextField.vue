@@ -5,6 +5,10 @@ const props = defineProps({
   modelValue: {
     required: true,
     type: String
+  },
+  type: {
+    required: false,
+    default: 'text'
   }
 })
 
@@ -15,7 +19,7 @@ const emitValue = (event: any) => {
 
 <template>
   <input
-    type="text"
+    :type="type"
     :value="modelValue"
     @input="emitValue"
     class="input-text-field"

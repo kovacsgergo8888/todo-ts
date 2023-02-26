@@ -35,7 +35,7 @@ const addTodo = async () => {
     </div>
     <div>
         <div>Due date</div>
-        <text-field v-model="dueDate"/>
+        <text-field v-model="dueDate" type="datetime-local"/>
     </div>
     <div class="flex justify-between">
         <btn @click="backToTodos" secondary>Back</btn>
